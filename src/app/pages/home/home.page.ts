@@ -24,9 +24,13 @@ export class HomePage implements OnInit {
     content:'',
     createAt:new Date().getTime(),
     name:''
+
   };
   username='';
+  globalid="";
+  localid="";
   public user : Observable<Details[]>;
+  public user2 : Observable<Details[]>;
   constructor(
 private auths:AuthenticationService,
 private router:Router,
@@ -44,9 +48,11 @@ public alertController: AlertController
       console.log("profile page constructor");
       this.user=this.udtl.getNotes();
 
+
      this.user.subscribe(x => x.forEach(p=>{
 
        this.note.name=p.fname;
+
      }))
 
 
@@ -54,8 +60,13 @@ public alertController: AlertController
   resize() {
     this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
 }
+
   addNote(){
-    this.fbSerice.addNote(this.note).then(()=>{
+    this.fbSerice.addmyNote(this.note).then(x=>{
+
+    })
+
+    this.fbSerice.addNote(this.note).then(x=>{
 
     }, err=>{
 

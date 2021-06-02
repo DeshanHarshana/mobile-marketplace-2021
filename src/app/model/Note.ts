@@ -4,6 +4,7 @@ export interface Note{
   content:string;
   createAt:any;
   name:string;
+
   //imageUri:string;
   //profile_name:string;
 }
