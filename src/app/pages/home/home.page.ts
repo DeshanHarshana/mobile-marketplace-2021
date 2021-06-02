@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { Details } from 'src/app/model/Details';
@@ -35,6 +35,7 @@ private ngFireAuth:AngularFireAuth,
 public toastCtrl: ToastController,
 public loadingController: LoadingController,
 private udtl:UserDetailsService,
+public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -88,9 +89,32 @@ private udtl:UserDetailsService,
 
     })
 
-    this.auths.Signout();
-    this.router.navigate(['']);
+    this.showOptions();
 
+  }
+  async showOptions() {
+    const alert = await this.alertController.create({
+      header: "Logout",
+      message: "Choose an option below",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Declined the offer");
+          },
+        },
+        {
+          text: "Logout",
+          handler: () => {
+            this.auths.Signout();
+            this.router.navigate(['']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 }

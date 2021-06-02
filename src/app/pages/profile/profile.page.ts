@@ -12,7 +12,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, map, take } from "rxjs/operators";
 import { FileService} from 'src/app/services/file.service'
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -45,7 +45,8 @@ export class ProfilePage implements OnInit {
 
 private storage: AngularFireStorage,private fileService: FileService,
 public toastCtrl: ToastController,
-public loadingController: LoadingController
+public loadingController: LoadingController,
+public alertController: AlertController
 
 
     ) {
@@ -83,6 +84,7 @@ public loadingController: LoadingController
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
   }
+
   signout(){
     this.ngFireAuth.authState.subscribe(user=>{
       if(user){
@@ -91,9 +93,7 @@ public loadingController: LoadingController
       }
 
     })
-
-    this.auths.Signout();
-    this.router.navigate(['']);
+    this.showOptions();
 
   }
   choose(){
@@ -124,9 +124,6 @@ public loadingController: LoadingController
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.url = url;
-
-
-
           console.log(UserDetailsService.docid);
           this.afs.collection('notes').doc(GetuidComponent.uid).collection('user_details').doc(UserDetailsService.docid).update({
             imageuri:url
@@ -144,6 +141,31 @@ public loadingController: LoadingController
   gotoEdit(){
     this.router.navigateByUrl('editpage');
   }
+  async showOptions() {
+    const alert = await this.alertController.create({
+      header: "Logout",
+      message: "Choose an option below",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Declined the offer");
+          },
+        },
+        {
+          text: "Logout",
+          handler: () => {
+            this.auths.Signout();
+            this.router.navigate(['']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
 }
 
 function openToast() {

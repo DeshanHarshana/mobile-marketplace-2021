@@ -40,4 +40,5 @@ export class EditpagePage implements OnInit {
     this.router.navigate(['tabs/profile']);
   }
 
+
 }

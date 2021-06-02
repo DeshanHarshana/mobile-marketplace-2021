@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-my-listings',
   templateUrl: './my-listings.page.html',
@@ -32,7 +32,8 @@ export class MyListingsPage implements OnInit {
     private fbSerice:FirebbaseService,
               private fbauth:AuthenticateService,
               private firestore: AngularFirestore,
-              public loadingController: LoadingController
+              public loadingController: LoadingController,
+              public alertController: AlertController
 
     ) {
       setInterval(() => {
@@ -67,9 +68,32 @@ export class MyListingsPage implements OnInit {
   signout(){
 
 
-    this.auths.Signout();
-    this.router.navigate(['']);
+    this.showOptions();
 
+  }
+  async showOptions() {
+    const alert = await this.alertController.create({
+      header: "Logout",
+      message: "Choose an option below",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Declined the offer");
+          },
+        },
+        {
+          text: "Logout",
+          handler: () => {
+            this.auths.Signout();
+            this.router.navigate(['']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 }
