@@ -6,6 +6,7 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 import { Observable } from 'rxjs';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { Details } from 'src/app/model/Details';
+import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
 import { Note } from 'src/app/model/Note';
 import { AuthenticationService } from 'src/app/serices/authentication.service';
 import { FirebbaseService } from 'src/app/services/firebabse.service';
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     title:'',
     content:'',
     createAt:new Date().getTime(),
-    name:''
+    name:'',
+    uid:''
 
   };
   username='';
@@ -54,7 +56,7 @@ public alertController: AlertController
        this.note.name=p.fname;
 
      }))
-
+  this.note.uid=GetuidComponent.uid;
 
   }
   resize() {

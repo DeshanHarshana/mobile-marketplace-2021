@@ -27,7 +27,7 @@ export class FirebbaseService {
 
   public  static details : Observable<Details[]>;
   public detailsCollection:AngularFirestoreCollection<Details>;
-
+  public static uid:string;
   constructor(private afs:AngularFirestore,
 
     private navCtrl: NavController
@@ -117,6 +117,7 @@ export class FirebbaseService {
 
 
   }
+
   addimageData(url:string){
     this.afs.collection('notes').doc(GetuidComponent.uid).update({
       url:url

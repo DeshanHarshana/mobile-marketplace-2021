@@ -17,7 +17,8 @@ export class UpdateNote2Page implements OnInit {
     title:'',
     content:'',
     createAt:new Date().getTime(),
-    name:''
+    name:'',
+    uid:''
   };
 
   constructor(private activatedRoute:ActivatedRoute,

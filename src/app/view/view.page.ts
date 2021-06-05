@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { GetuidComponent } from '../model/getuid/getuid.component';
 import { Note } from '../model/Note';
 import { FirebbaseService } from '../services/firebabse.service';
 
@@ -15,23 +16,33 @@ export class ViewPage implements OnInit {
     title:'',
     content:'',
     createAt:'',
-    name:''
+    name:'',
+    uid:''
   };
+  noteuid='';
+  hidden=false;
   constructor(private fbSerice:FirebbaseService,
 
     private router:Router,
     public loadingController: LoadingController,
-    private activatedRouter : ActivatedRoute) { }
+    private activatedRouter : ActivatedRoute) {
+
+     }
 
   ngOnInit() {
+
   }
   ngAfterViewInit():void{
     const id =this.activatedRouter.snapshot.paramMap.get('id');
     if(id){
       this.fbSerice.getNote(id).subscribe(notedata=>{
         this.note=notedata;
+
+        this.noteuid=this.note.uid;
+        this.canAccess();
       })
     }
+
   }
   deleteNote(){
     this.presentLoading();
@@ -52,6 +63,11 @@ export class ViewPage implements OnInit {
 
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
+  }
+  canAccess(){
+    return !(GetuidComponent.uid==this.noteuid);
+
+
   }
 
 }

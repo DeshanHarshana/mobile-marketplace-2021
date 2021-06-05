@@ -15,7 +15,8 @@ export class View2Page implements OnInit {
     title:'',
     content:'',
     createAt:'',
-    name:''
+    name:'',
+    uid:''
   };
   constructor(private fbSerice:FirebbaseService,
 
