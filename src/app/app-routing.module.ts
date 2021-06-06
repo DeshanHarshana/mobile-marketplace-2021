@@ -43,6 +43,22 @@ const routes: Routes = [
   {
     path: 'editpage',
     loadChildren: () => import('./pages/editpage/editpage.module').then( m => m.EditpagePageModule)
+  },
+  {
+    path: 'listing',
+    loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'view2/:id',
+    loadChildren: () => import('./view2/view2.module').then( m => m.View2PageModule)
+  },
+  {
+    path: 'update-note2/:id',
+    loadChildren: () => import('./update-note2/update-note2.module').then( m => m.UpdateNote2PageModule)
   }
 ];
 @NgModule({

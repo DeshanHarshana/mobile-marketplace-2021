@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { GetuidComponent } from '../model/getuid/getuid.component';
 import { Note } from '../model/Note';
 import { FirebbaseService } from '../services/firebabse.service';
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './view.page.html',
-  styleUrls: ['./view.page.scss'],
+  selector: 'app-view2',
+  templateUrl: './view2.page.html',
+  styleUrls: ['./view2.page.scss'],
 })
-export class ViewPage implements OnInit {
+export class View2Page implements OnInit {
   note:Note={
     id:'',
     title:'',
@@ -19,34 +18,25 @@ export class ViewPage implements OnInit {
     name:'',
     uid:''
   };
-  noteuid='';
-  hidden=false;
   constructor(private fbSerice:FirebbaseService,
 
     private router:Router,
     public loadingController: LoadingController,
-    private activatedRouter : ActivatedRoute) {
-
-     }
+    private activatedRouter : ActivatedRoute) { }
 
   ngOnInit() {
-
   }
   ngAfterViewInit():void{
     const id =this.activatedRouter.snapshot.paramMap.get('id');
     if(id){
-      this.fbSerice.getNote(id).subscribe(notedata=>{
+      this.fbSerice.getmyNote(id).subscribe(notedata=>{
         this.note=notedata;
-
-        this.noteuid=this.note.uid;
-        this.canAccess();
       })
     }
-
   }
   deleteNote(){
     this.presentLoading();
-    this.fbSerice.deleteNote(this.note.id).then(()=>{
+    this.fbSerice.deletemyNote(this.note.id).then(()=>{
       this.router.navigateByUrl('tabs/my-listing');
     })
   }
@@ -64,10 +54,6 @@ export class ViewPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
-  canAccess(){
-    return !(GetuidComponent.uid==this.noteuid);
-
-
-  }
 
 }
+
