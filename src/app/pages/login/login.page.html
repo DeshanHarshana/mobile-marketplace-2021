@@ -1,18 +1,22 @@
 
 <ion-content class="content-class">
   <div class="login-logo">
+<<<<<<< HEAD
     <img src="assets/icon/app_icon.png" class="logo_icon">
+=======
+    <img src="assets/icon/appicon.png" class="logo_icon">
+>>>>>>> 0b7c9e422febf6434c35cf4d748b574cb66613d8
     <p class="login_name">Mobile Marketplace</p>
   </div>
   <ion-card class="card-class">
   <form #loginForm="ngForm">
     <ion-list lines="none">
       <ion-item lines="none">
-      <ion-input [(ngModel)]="email" placeholder="Email" name="email"required class="input-class"></ion-input>
+      <ion-input [(ngModel)]="email" placeholder="Email" name="email" class="input-class" required></ion-input>
 
     </ion-item>
     <ion-item lines="none">
-      <ion-input [(ngModel)]="password" placeholder="Password" name="password" type="password" required class="input-class"></ion-input>
+      <ion-input [(ngModel)]="password" placeholder="Password" name="password" type="password" class="input-class" required></ion-input>
 
     </ion-item>
     </ion-list>
@@ -21,6 +25,7 @@
         <ion-button (click)="onLogin(loginForm)" type="submit" expand="block" color="success" class="btn_class">
           Login
           </ion-button>
+
 
 
        <label class="errorMessage">{{errorMessage}}</label>
