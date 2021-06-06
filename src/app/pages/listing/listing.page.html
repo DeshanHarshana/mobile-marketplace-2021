@@ -1,0 +1,63 @@
+<ion-app>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h2>My Item List</h2>
+      </ion-title>
+
+      <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <div>
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-item lines="none">
+          <ion-label style="font-weight: 800; font-size:1.5em;">
+            <p class="txt-time" slot="end">{{time | date:'mediumTime'}}</p>
+            <h2>{{today| date:'fullDate'}}</h2>
+            <br>
+            <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+
+          </ion-label>
+
+
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+    <ion-content [fullscreen]="true">
+
+      <ion-list *ngFor="let note of (notes|async) | filter:filterTerm">
+        <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>
+            {{note.createAt|date:'mediumDate'}}
+            added by {{note.name}}
+          </ion-card-subtitle>
+          <ion-item lines="none">
+            <ion-icon name="clipboard-outline"></ion-icon>
+            <ion-label>{{note.title}}</ion-label>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button fill="outline" expand="block" [routerLink]="'/view2/'+note.id" color="secondary">View</ion-button>
+        </ion-card-content>
+      </ion-card>
+      </ion-list>
+
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add-circle-outline" (click)="gotoaddNote()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+
+    </ion-content>
+
+
+  </ion-app>

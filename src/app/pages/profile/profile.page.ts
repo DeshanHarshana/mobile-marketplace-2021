@@ -12,7 +12,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, map, take } from "rxjs/operators";
 import { FileService} from 'src/app/services/file.service'
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
   oc:string;
   uploading:string;
   imageuri:string;
-
+  static username:string;
 
 
 
@@ -45,7 +45,8 @@ export class ProfilePage implements OnInit {
 
 private storage: AngularFireStorage,private fileService: FileService,
 public toastCtrl: ToastController,
-public loadingController: LoadingController
+public loadingController: LoadingController,
+public alertController: AlertController
 
 
     ) {
@@ -58,6 +59,7 @@ public loadingController: LoadingController
       this.uploading="";
      this.user.subscribe(x => x.forEach(p=>{
        this.imageuri=p.imageuri;
+       ProfilePage.username=p.fname;
      }))
 
     }
@@ -82,6 +84,7 @@ public loadingController: LoadingController
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
   }
+
   signout(){
     this.ngFireAuth.authState.subscribe(user=>{
       if(user){
@@ -90,10 +93,14 @@ public loadingController: LoadingController
       }
 
     })
+    this.showOptions();
 
-    this.auths.Signout();
-    this.router.navigate(['']);
-
+  }
+  choose(){
+    if(this.selectedImage!=null){
+      return false;
+    }
+    return true;
   }
   delete(downloadUrl) {
     try{
@@ -104,7 +111,8 @@ public loadingController: LoadingController
 
   }
   save() {
-    var name = this.selectedImage.name;
+
+   var name= this.selectedImage.name;
     console.log(name);
     this.presentLoading();
     this.uploading="uploading your image please wait";
@@ -116,9 +124,6 @@ public loadingController: LoadingController
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.url = url;
-
-
-
           console.log(UserDetailsService.docid);
           this.afs.collection('notes').doc(GetuidComponent.uid).collection('user_details').doc(UserDetailsService.docid).update({
             imageuri:url
@@ -136,6 +141,31 @@ public loadingController: LoadingController
   gotoEdit(){
     this.router.navigateByUrl('editpage');
   }
+  async showOptions() {
+    const alert = await this.alertController.create({
+      header: "Logout",
+      message: "Choose an option below",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Declined the offer");
+          },
+        },
+        {
+          text: "Logout",
+          handler: () => {
+            this.auths.Signout();
+            this.router.navigate(['']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
 }
 
 function openToast() {

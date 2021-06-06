@@ -7,11 +7,11 @@ import { AuthenticationService } from '../serices/authentication.service';
 import { FirebbaseService } from '../services/firebabse.service';
 
 @Component({
-  selector: 'app-update-note',
-  templateUrl: './update-note.page.html',
-  styleUrls: ['./update-note.page.scss'],
+  selector: 'app-update-note2',
+  templateUrl: './update-note2.page.html',
+  styleUrls: ['./update-note2.page.scss'],
 })
-export class UpdateNotePage implements OnInit {
+export class UpdateNote2Page implements OnInit {
   @ViewChild('myInput') myInput: ElementRef;
   note:Note={
     title:'',
@@ -19,8 +19,8 @@ export class UpdateNotePage implements OnInit {
     createAt:new Date().getTime(),
     name:'',
     uid:''
-
   };
+
   constructor(private activatedRoute:ActivatedRoute,
     private fbSerice:FirebbaseService,
     private toastCtrl:ToastController,
@@ -36,10 +36,11 @@ export class UpdateNotePage implements OnInit {
   ngAfterViewInit():void{
     const id =this.activatedRouter.snapshot.paramMap.get('id');
     if(id){
-      this.fbSerice.getNote(id).subscribe(notedata=>{
+      this.fbSerice.getmyNote(id).subscribe(notedata=>{
         this.note=notedata;
       })
     }
+
   }
   resize() {
     this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
@@ -58,7 +59,7 @@ async presentLoading() {
 }
   UpdateNote(){
     this.presentLoading();
-    this.fbSerice.updateNote(this.note).then(()=>{
+    this.fbSerice.updatemyNote(this.note).then(()=>{
       console.log("edfgesaf");
       this.router.navigate(['tabs/my-listing']);
     },err=>{

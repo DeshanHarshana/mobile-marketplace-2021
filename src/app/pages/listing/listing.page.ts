@@ -1,75 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Note } from 'src/app/model/Note';
 import { AuthenticationService } from 'src/app/serices/authentication.service';
 import { AuthenticateService } from 'src/app/services/authentication.service';
 import { FirebbaseService } from 'src/app/services/firebabse.service';
-import { first } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AlertController, LoadingController } from '@ionic/angular';
+
 @Component({
-  selector: 'app-my-listings',
-  templateUrl: './my-listings.page.html',
-  styleUrls: ['./my-listings.page.scss'],
+  selector: 'app-listing',
+  templateUrl: './listing.page.html',
+  styleUrls: ['./listing.page.scss'],
 })
-export class MyListingsPage implements OnInit {
+export class ListingPage implements OnInit {
   public notes:Observable<Note[]>;
   public backupnote:Observable<Note[]>;
-  things$: Observable<Note[]>;
   today:number=  Date.now();
   public time;
   public noteList: any[];
   public noteListBackup: any[];
   filterTerm: string;
-
-  constructor(private auths:AuthenticationService,
+  constructor(
+    private auths:AuthenticationService,
     private router:Router,
     private ngFireAuth:AngularFireAuth,
     private fbSerice:FirebbaseService,
               private fbauth:AuthenticateService,
               private firestore: AngularFirestore,
-              public loadingController: LoadingController,
               public alertController: AlertController
-
-    ) {
-      setInterval(() => {
-        this.time = new Date();
-     }, 1000);
-    }
+  ){
+    setInterval(() => {
+      this.time = new Date();
+   }, 1000);
+  }
 
   ngOnInit() {
-
     this.fbSerice.ngOnInit();
 
-    this.notes=this.fbSerice.getNotes();
+    this.notes=this.fbSerice.getmyNotes();
     console.log("my listing loadeed");
-
-  }
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: 2000
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
-
-
-  static loadit(){
-
   }
   signout(){
 
 
     this.showOptions();
 
+  }
+  gotoaddNote(){
+    this.router.navigate(['home']);
   }
   async showOptions() {
     const alert = await this.alertController.create({
@@ -95,5 +75,6 @@ export class MyListingsPage implements OnInit {
 
     await alert.present();
   }
+
 
 }

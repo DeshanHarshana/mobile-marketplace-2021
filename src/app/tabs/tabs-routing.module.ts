@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('../pages/listing/listing.module').then( m => m.ListingPageModule)
       },
       {
         path: 'profile',
@@ -21,14 +21,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/my-listing',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/my-listing',
     pathMatch: 'full'
   }
 ];

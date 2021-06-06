@@ -12,6 +12,9 @@
   .login_logo img{
     max-width: 150px;
   }
+  .login_logo img{
+    max-width: 150px;
+  }
   .login_name{
     margin: 10px;
     font-size: 4rem;
@@ -19,6 +22,7 @@
     font-family: 'Mr Dafoe', cursive;
     color: #3981f7;
   }
+
 }
 .btn_class{
   height: 50px;
@@ -28,7 +32,10 @@
 }
 ion-list{
   --ion-background-color:transparent;
-
+  .signup{
+    color: rgb(23, 0, 155);
+    font-weight: bold;
+  }
 }
 .createAcc{
   text-align:center;
@@ -50,7 +57,11 @@ ion-item{
 
 .content-class {
   --background: rgb(252, 245, 177);
+<<<<<<< HEAD
 }
+=======
+
+>>>>>>> 5bfde54f27b636ee20e42cd75420986358827ed7
 
 .input-class{
   // --background: rgb(158, 185, 178);
@@ -58,6 +69,17 @@ ion-item{
   border: 1px solid rgba(3, 77, 3, 0.2);
   border-radius: 10px;
   --color: rgb(3, 77, 3);
+}
+.input-class{
+  // --background: rgb(158, 185, 178);
+  --placeholder-color: rgb(3, 77, 3);
+  border: 1px solid rgba(3, 77, 3, 0.2);
+  border-radius: 10px;
+  --color: rgb(3, 77, 3);
+}
+
+.card-class{
+  --background: rgb(209, 243, 233);
 }
 
 .card-class{
