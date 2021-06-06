@@ -7,7 +7,10 @@
   margin-bottom: 10%;
   .logo_icon{
     width: 120px !important;
-
+    
+  }
+  .login_logo img{
+    max-width: 150px;
   }
   .login_logo img{
     max-width: 150px;
@@ -22,14 +25,10 @@
 
 }
 .btn_class{
-  color:black;
   height: 50px;
   margin-top: 20px;
   --border-radius:5px;
   font-weight: 600;
-}
-.login_logo img{
-  max-width: 150px;
 }
 ion-list{
   --ion-background-color:transparent;
@@ -42,7 +41,8 @@ ion-list{
   text-align:center;
   font-family: Arial, Helvetica, sans-serif;
   .signup{
-    color: red;
+    color: rgb(23, 0, 155);
+    font-weight: bold;
   }
 
 }
@@ -57,9 +57,14 @@ ion-item{
 
 .content-class {
   --background: rgb(252, 245, 177);
+}
 
-
-  color: #fff;
+.input-class{
+  // --background: rgb(158, 185, 178);
+  --placeholder-color: rgb(3, 77, 3);
+  border: 1px solid rgba(3, 77, 3, 0.2);
+  border-radius: 10px;
+  --color: rgb(3, 77, 3);
 }
 .input-class{
   // --background: rgb(158, 185, 178);
@@ -73,3 +78,6 @@ ion-item{
   --background: rgb(209, 243, 233);
 }
 
+.card-class{
+  --background: rgb(209, 243, 233);
+}
