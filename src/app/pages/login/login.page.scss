@@ -9,12 +9,17 @@
     width: 120px !important;
 
   }
+  .login_logo img{
+    max-width: 150px;
+  }
   .login_name{
     margin: 10px;
-    font-size: 2.7rem;
-font-family:Chalkduster, fantasy;
-
+    font-size: 4rem;
+    // font-family:Chalkduster, fantasy;
+    font-family: 'Mr Dafoe', cursive;
+    color: #3981f7;
   }
+
 }
 .btn_class{
   color:black;
@@ -28,7 +33,10 @@ font-family:Chalkduster, fantasy;
 }
 ion-list{
   --ion-background-color:transparent;
-
+  .signup{
+    color: rgb(23, 0, 155);
+    font-weight: bold;
+  }
 }
 .createAcc{
   text-align:center;
@@ -47,10 +55,21 @@ ion-item{
   text-align: center;
 }
 
-.my-custom-class {
-  --background: #222;
-  --spinner-color: #fff;
+.content-class {
+  --background: rgb(252, 245, 177);
+
 
   color: #fff;
+}
+.input-class{
+  // --background: rgb(158, 185, 178);
+  --placeholder-color: rgb(3, 77, 3);
+  border: 1px solid rgba(3, 77, 3, 0.2);
+  border-radius: 10px;
+  --color: rgb(3, 77, 3);
+}
+
+.card-class{
+  --background: rgb(209, 243, 233);
 }
 
