@@ -15,7 +15,6 @@
   }
 }
 .btn_class{
-  color:black;
   height: 50px;
   margin-top: 20px;
   --border-radius:5px;
@@ -25,10 +24,10 @@
   max-width: 150px;
 }
 ion-list{
-  -ion-background-color:transparent;
+  --ion-background-color:transparent;
 }
 .createAcc{
-  test-align:center;
+  text-align:center;
   .registerTag{
     color:var(--ion-color-secondary);
     font-weight: bold;
@@ -38,4 +37,12 @@ ion-list{
   padding-right: 25px;
   color:red;
   text-align: center;
+}
+.signUp-class{
+    color: rgb(4, 189, 251);
+    font-weight: bolder;
+    font-size: 2.5em;
+}
+.content-class{
+  --background: rgb(252, 245, 177);
 }
